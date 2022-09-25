@@ -6,9 +6,30 @@
     </x-slot>
 
     <div class="container m-5">
+        {{-- Alert --}}
+        <div class="row">
+            <div class="col-12">
+                @if (session('status'))
+                    <div class="alert alert-success alert-dismissible show fade">
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-warning alert-dismissible show fade">
+                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session('error') }}
+                    </div>
+                @endif
+            </div>
+        </div>
         <div class="card">
             <div class="card-body">
-                <a href="{{ url('/kategori/tambah') }}" class="btn btn-primary">Tambah Data</a>
+                <a href="{{ url('/kategori/tambah') }}" class="btn btn-sm btn-primary">Tambah Data</a>
             </div>
         </div>
 
@@ -23,13 +44,62 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-
-                        </tr>
+                        @foreach ($kategori as $i)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $i->nama }}</td>
+                                <td><a href="{{ route('kategoriEdit', ['id' => $i->id]) }}"
+                                        class="btn btn-sm btn-white text-success border-success"> <i
+                                            class="fas fa-pen    "></i>
+                                        Edit</a>
+                                    <button type="button" class="btn btn-sm btn-white text-danger border-danger"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                                        data-id="{{ $i->id }}" data-nama="{{ $i->nama }}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> Hapus</button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+                {{ $kategori->links() }}
             </div>
         </div>
     </div>
-
+    <!-- Modal Hapus-->
+    <div class="modal fade exampleModalCenter" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus Kategori </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="formHapus">
+                        @method('delete')
+                        @csrf
+                        <p class="modal-text"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Hapus!</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#exampleModalCenter').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var id = button.data('id') // Extract info from data-* attributes
+                var nama = button.data('nama')
+                var modal = $(this)
+                modal.find('.modal-text').text('Yakin ingin menghapus kategori ' + nama + ' ?')
+                document.getElementById('formHapus').action = '/kategori/' + id;
+            })
+        });
+    </script>
 </x-app-layout>

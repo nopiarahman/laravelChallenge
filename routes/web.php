@@ -25,5 +25,9 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
     Route::get('/kategori/tambah', [KategoriController::class, 'create']);
+    Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategoriEdit');
+    Route::post('/kategori', [KategoriController::class, 'store'])->name('kategoriSimpan');
+    Route::patch('/kategori/{id}', [KategoriController::class, 'update'])->name('kategoriUpdate');
+    Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
 });
 require __DIR__.'/auth.php';
