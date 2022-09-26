@@ -55,7 +55,7 @@
                                 <td>{{ $i->kategori->nama }}</td>
                                 <td>{{ $i->judul }}</td>
                                 <td><img src="{{ Storage::url($i->foto) }}" alt="" width="100px"></td>
-                                <td>{!! Str::limit($i->deskripsi, 70, '.....') !!}</td>
+                                <td>{{ Str::limit($i->deskripsi, 70, '..... ') }}</td>
                                 <td><a href="{{ route('beritaEdit', ['id' => $i->id]) }}"
                                         class="btn btn-sm btn-white text-success border-success"> <i
                                             class="fas fa-pen    "></i>

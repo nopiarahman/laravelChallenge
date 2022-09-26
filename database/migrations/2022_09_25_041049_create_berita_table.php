@@ -16,9 +16,9 @@ class CreateBeritaTable extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Kategori::class)->onDelete('cascade');
+            $table->foreignId('kategori_id')->constrained('kategori')->onDelete('CASCADE');
             $table->string('judul');
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->date('tanggal');
             $table->text('deskripsi');
             $table->timestamps();
