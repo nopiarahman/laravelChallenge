@@ -56,7 +56,7 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a href="{{ route('beritaEdit', ['id' => $i->id]) }}"
+                                                <a href="{{ route('kategoriEdit', ['id' => $i->id]) }}"
                                                     class="dropdown-item">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i> Edit
                                                 </a>
