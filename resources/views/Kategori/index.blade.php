@@ -48,14 +48,27 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $i->nama }}</td>
-                                <td><a href="{{ route('kategoriEdit', ['id' => $i->id]) }}"
-                                        class="btn btn-sm btn-white text-success border-success"> <i
-                                            class="fas fa-pen    "></i>
-                                        Edit</a>
-                                    <button type="button" class="btn btn-sm btn-white text-danger border-danger"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                                        data-id="{{ $i->id }}" data-nama="{{ $i->nama }}">
-                                        <i class="fa fa-trash" aria-hidden="true"></i> Hapus</button>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-white border-success text-success dropdown-toggle"
+                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Aksi
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="{{ route('beritaEdit', ['id' => $i->id]) }}"
+                                                    class="dropdown-item">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModalCenter" data-id="{{ $i->id }}"
+                                                    data-nama="{{ $i->nama }}">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i> Hapus</button>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
