@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kategori') }}
+            {{ __('Berita') }}
         </h2>
     </x-slot>
 
@@ -29,7 +29,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <a href="{{ url('/kategori/tambah') }}" class="btn btn-sm btn-primary">Tambah Data</a>
+                <a href="{{ url('/berita/tambah') }}" class="btn btn-sm btn-primary">Tambah Data</a>
             </div>
         </div>
 
@@ -39,29 +39,37 @@
                     <thead>
                         <tr>
                             <td>No</td>
-                            <td>Nama Kategori</td>
+                            <td>Tanggal</td>
+                            <td>Kategori</td>
+                            <td>Judul</td>
+                            <td>Foto</td>
+                            <td>Deskripsi</td>
                             <td>Aksi</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($kategori as $i)
+                        @foreach ($berita as $i)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $i->nama }}</td>
-                                <td><a href="{{ route('kategoriEdit', ['id' => $i->id]) }}"
+                                <td>{{ $i->tanggal }}</td>
+                                <td>{{ $i->kategori->nama }}</td>
+                                <td>{{ $i->judul }}</td>
+                                <td><img src="{{ Storage::url($i->foto) }}" alt="" width="100px"></td>
+                                <td>{!! Str::limit($i->deskripsi, 70, '.....') !!}</td>
+                                <td><a href="{{ route('beritaEdit', ['id' => $i->id]) }}"
                                         class="btn btn-sm btn-white text-success border-success"> <i
                                             class="fas fa-pen    "></i>
                                         Edit</a>
                                     <button type="button" class="btn btn-sm btn-white text-danger border-danger"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                                        data-id="{{ $i->id }}" data-nama="{{ $i->nama }}">
+                                        data-id="{{ $i->id }}" data-judul="{{ $i->judul }}">
                                         <i class="fa fa-trash" aria-hidden="true"></i> Hapus</button>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                {{ $kategori->links() }}
+                {{ $berita->links() }}
             </div>
         </div>
     </div>
@@ -71,7 +79,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus Kategori </h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus Berita </h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -95,10 +103,10 @@
             $('#exampleModalCenter').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var id = button.data('id') // Extract info from data-* attributes
-                var nama = button.data('nama')
+                var judul = button.data('judul')
                 var modal = $(this)
-                modal.find('.modal-text').text('Yakin ingin menghapus kategori ' + nama + ' ?')
-                document.getElementById('formHapus').action = '/kategori/' + id;
+                modal.find('.modal-text').text('Yakin ingin menghapus berita ' + judul + ' ?')
+                document.getElementById('formHapus').action = '/berita/' + id;
             })
         });
     </script>

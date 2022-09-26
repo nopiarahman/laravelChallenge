@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="container m-5">
+    <div class="container m-5 mx-auto">
         <div class="card">
             <div class="card-header">
                 Tambah Kategori
