@@ -1,7 +1,9 @@
-##Tentang Project
+## Tentang Project
 Ini adalah project portal berita sederhana menggunakan Laravel v.8+, didalamnya Admin panel dalam bentuk web untuk mengolah data berita, dan juga disediakan API endpoint untuk menggambil dan mencari data berita.
 
-###Database design
+### Database design
+
+https://drive.google.com/file/d/1jgemfBEOcuCoWsvnQRb4eRzzofV1r41A/view?usp=sharing
 
 ## Development Setup
 ### Detail Project
