@@ -5,6 +5,11 @@ Ini adalah project portal berita sederhana menggunakan Laravel v.8+, didalamnya 
 
 https://drive.google.com/file/d/1jgemfBEOcuCoWsvnQRb4eRzzofV1r41A/view?usp=sharing
 
+## API Documentation
+
+Silahkan klik link berikut untuk dokumentasi API yang telah dibuat:
+https://documenter.getpostman.com/view/21533265/2s83YWkQmW
+
 ## Development Setup
 ### Detail Project
 - Project menggunakan Laravel v.8+, database MySQL 
